@@ -1,73 +1,76 @@
-# Welcome to your Lovable project
+# NHAKONTA-CV-WEB
 
-## Project info
+*Gerencie e compartilhe dados bancários seguro para os cidadãos cabo-verdianos.*
 
-**URL**: https://lovable.dev/projects/834ba6ee-5773-46b4-b8d8-a55bd554e0d8
+![Último commit](https://img.shields.io/github/last-commit/hermangoncalves/nhakonta-cv-web?style=flat&logo=git&logoColor=white&color=0080ff)
+![Linguagem principal](https://img.shields.io/github/languages/top/hermangoncalves/nhakonta-cv-web?style=flat&color=0080ff)
+![Contagem de linguagens](https://img.shields.io/github/languages/count/hermangoncalves/nhakonta-cv-web?style=flat&color=0080ff)
 
-## How can I edit this code?
+## 📑 Índice
 
-There are several ways of editing your application.
+- [Visão Geral](#visão-geral)
+- [Primeiros Passos](#primeiros-passos)
+  - [Pré-requisitos](#pré-requisitos)
+  - [Instalação](#instalação)
+  - [Uso](#uso)
+  - [Testes](#testes)
 
-**Use Lovable**
+---
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/834ba6ee-5773-46b4-b8d8-a55bd554e0d8) and start prompting.
+## 🧭 Visão Geral
 
-Changes made via Lovable will be committed automatically to this repo.
+**nhakonta-cv-web** é uma aplicação web moderna desenvolvida para permitir que cidadãos de Cabo Verde gerenciem e compartilhem seus dados bancários com segurança e eficiência.
 
-**Use your preferred IDE**
+### Por que usar o nhakonta-cv-web?
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Este projeto visa simplificar a gestão bancária com foco em experiência do usuário e produtividade no desenvolvimento. Os principais recursos incluem:
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- 🚀 **Desenvolvimento com Vite:** Compilações rápidas e recarregamento instantâneo para um fluxo de trabalho eficiente.
+- 🔒 **Autenticação com Clerk:** Gerencie o acesso do usuário com segurança reforçada.
+- 🎨 **Estilo com Tailwind CSS:** Desenvolvimento ágil com uma abordagem utilitária para CSS.
+- 📱 **Design Responsivo:** Compatibilidade com dispositivos móveis e desktops.
+- 🛠️ **Biblioteca de Componentes Modular:** Reutilização de componentes para manter o código limpo e escalável.
 
-Follow these steps:
+---
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## 🚀 Primeiros Passos
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### ✅ Pré-requisitos
 
-# Step 3: Install the necessary dependencies.
-npm i
+Antes de iniciar, é necessário ter instalado:
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+- **Linguagem de Programação:** TypeScript
+- **Gerenciador de Pacotes:** pnpm
+
+### 🛠 Instalação
+
+Construa o projeto a partir do código-fonte e instale as dependências:
+
+1. **Clone o repositório:**
+
+```bash
+git clone https://github.com/hermangoncalves/nhakonta-cv-web.git
+````
+
+2. **Navegue até o diretório do projeto:**
+
+```bash
+cd nhakonta-cv-web
 ```
 
-**Edit a file directly in GitHub**
+3. **Instale as dependências com npm:**
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```bash
+npm install
+```
 
-**Use GitHub Codespaces**
+### ▶️ Uso
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Para rodar o projeto localmente:
 
-## What technologies are used for this project?
+```bash
+pnpm run dev
+```
 
-This project is built with:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/834ba6ee-5773-46b4-b8d8-a55bd554e0d8) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+[⬆ Voltar ao topo](#nhakonta-cv-web)
