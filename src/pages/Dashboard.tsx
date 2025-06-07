@@ -13,7 +13,7 @@ import { Navbar } from "@/components/navbar";
 import { useUser } from "@clerk/clerk-react";
 import { Footer } from "@/components/Footer";
 import { useAuth } from "@clerk/clerk-react";
-import { BankAccountForm } from "@/components/BankAccountForm";
+import { BankAccountModalForm } from "@/components/BankAccountForm";
 import { ShareDialog } from "@/components/ShareDialog";
 
 import { BankAccount, DashboardSchema, dashboardSchema } from "@/schemas";
@@ -63,8 +63,8 @@ const Dashboard = () => {
     fetchAccounts();
   }, []);
 
-  const copyToClipboard = (text: string, label: string) => {
-    navigator.clipboard.writeText(text);
+  const copyToClipboard = (text: string | number, label: string) => {
+    navigator.clipboard.writeText(text.toString());
     toast({
       title: "Copiado!",
       description: `${label} copiado para a área de transferência`,
@@ -302,14 +302,14 @@ const Dashboard = () => {
 
       {/* Modals */}
       {showAddForm && (
-        <BankAccountForm
+        <BankAccountModalForm
           onSubmit={handleAddAccount}
           onCancel={() => setShowAddForm(false)}
         />
       )}
 
       {editingAccount && (
-        <BankAccountForm
+        <BankAccountModalForm
           initialData={editingAccount}
           onSubmit={handleEditAccount}
           onCancel={() => setEditingAccount(null)}
