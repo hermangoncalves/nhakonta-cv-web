@@ -1,7 +1,6 @@
-import { Building2 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { routes } from "@/App";
-import { SignIn, SignInButton } from "@clerk/clerk-react";
+import { routes } from "@/router";
+import { SignInButton } from "@clerk/clerk-react";
 import { SignedOut } from "@clerk/clerk-react";
 import { UserButton } from "@clerk/clerk-react";
 import { SignedIn } from "@clerk/clerk-react";
