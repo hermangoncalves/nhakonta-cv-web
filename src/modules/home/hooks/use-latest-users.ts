@@ -4,9 +4,7 @@ import { LatestUsersResponse } from "../schemas";
 
 
 async function getLatestUsers() {
-  console.log('here')
   const response = await API.get<LatestUsersResponse>("/api/latest-users");
-  console.log(response)
   return response.data;
 }
 
