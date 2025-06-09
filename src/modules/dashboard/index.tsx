@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -7,7 +7,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Plus, Building2, Share2, Copy, Edit, Trash2 } from "lucide-react";
+import {
+  Plus,
+  Building2,
+  CreditCard,
+  Share2,
+  Copy,
+  Edit,
+  Trash2,
+} from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Navbar } from "@/components/navbar";
 import { useUser } from "@clerk/clerk-react";
@@ -16,52 +24,19 @@ import { useAuth } from "@clerk/clerk-react";
 import { BankAccountModalForm } from "@/modules/dashboard/components/BankAccountForm";
 import { ShareDialog } from "@/modules/dashboard/components/ShareDialog";
 
-import { BankAccount, DashboardSchema, dashboardSchema } from "@/schemas";
+import { BankAccount } from "@/schemas";
+import { useDasboardData } from "./hooks/use-dasboard";
 
 const Dashboard = () => {
   const { user } = useUser();
   const { toast } = useToast();
-  const { getToken } = useAuth();
-  const [dashboardData, setDashboardData] = useState<DashboardSchema | null>(
-    null
-  );
+  const { data: dashboardData } = useDasboardData();
 
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingAccount, setEditingAccount] = useState<BankAccount | null>(
     null
   );
   const [shareAccount, setShareAccount] = useState<BankAccount | null>(null);
-
-  useEffect(() => {
-    const fetchAccounts = async () => {
-      const token = await getToken();
-      if (!token) {
-        throw new Error("Failed to obtain JWT");
-      }
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/users/dashboard`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      const json = await response.json();
-      const result = dashboardSchema.safeParse(json.data);
-
-      if (!result.success) {
-        toast({
-          title: "Erro ao obter contas bancárias",
-          description: "Por favor, tente novamente mais tarde",
-        });
-        return;
-      }
-      setDashboardData(result.data);
-    };
-    fetchAccounts();
-  }, []);
 
   const copyToClipboard = (text: string | number, label: string) => {
     navigator.clipboard.writeText(text.toString());
@@ -110,7 +85,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-green-50">
+    <div className="min-h-screen">
       {/* Header */}
       <Navbar />
 
@@ -140,7 +115,7 @@ const Dashboard = () => {
                         {dashboardData?.totalAccounts}
                       </p>
                     </div>
-                    <Building2 className="h-6 w-6 text-indigo-600" />
+                    <CreditCard className="h-6 w-6 text-primary" />
                   </div>
                 </CardContent>
               </Card>
@@ -156,7 +131,7 @@ const Dashboard = () => {
                         {dashboardData?.totalShared}
                       </p>
                     </div>
-                    <Share2 className="h-6 w-6 text-indigo-600" />
+                    <Share2 className="h-6 w-6 text-primary" />
                   </div>
                 </CardContent>
               </Card>
@@ -167,10 +142,7 @@ const Dashboard = () => {
               <h2 className="text-xl sm:text-2xl font-semibold text-gray-900">
                 Minhas Contas
               </h2>
-              <Button
-                onClick={() => setShowAddForm(true)}
-                className="bg-indigo-600 hover:bg-indigo-700 text-white"
-              >
+              <Button onClick={() => setShowAddForm(true)}>
                 <Plus className="h-4 w-4 mr-2" />
                 Adicionar Conta
               </Button>
@@ -185,7 +157,7 @@ const Dashboard = () => {
                 >
                   <CardHeader className="pb-4">
                     <CardTitle className="text-lg text-gray-900 flex items-center">
-                      <Building2 className="h-5 w-5 mr-2 text-indigo-600" />
+                      <Building2 className="h-5 w-5 mr-2 text-primary" />
                       {account.bankName.split("(")[0].trim()}
                     </CardTitle>
                     <CardDescription className="text-gray-600">
@@ -272,7 +244,7 @@ const Dashboard = () => {
             {dashboardData?.bankAccounts.length === 0 && (
               <Card className="border-none shadow-lg bg-white/70 backdrop-blur-sm">
                 <CardContent className="p-12 text-center">
-                  <Building2 className="h-16 w-16 text-indigo-400 mx-auto mb-4" />
+                  <Building2 className="h-16 w-16 text-primary mx-auto mb-4" />
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">
                     Nenhuma conta adicionada
                   </h3>

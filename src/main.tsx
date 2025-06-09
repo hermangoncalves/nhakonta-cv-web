@@ -4,22 +4,20 @@ import App from "./App.tsx";
 import "./index.css";
 import { ClerkProvider } from "@clerk/clerk-react";
 import { routes } from "./router.tsx";
-
-const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
-
-if (!PUBLISHABLE_KEY) {
-  throw new Error("Missing Publishable Key");
-}
+import { env } from "@/lib/env";
+import APIInterceptorProvider from "./components/providers/api-interceptor-provider.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ClerkProvider
-      publishableKey={PUBLISHABLE_KEY}
+      publishableKey={env.CLERK_PUBLISHABLE_KEY}
       afterSignOutUrl={routes.home}
       signUpFallbackRedirectUrl={routes.onBoarding}
       signInFallbackRedirectUrl={routes.dashboard}
     >
-      <App />
+      <APIInterceptorProvider>
+        <App />
+      </APIInterceptorProvider>
     </ClerkProvider>
   </React.StrictMode>
 );

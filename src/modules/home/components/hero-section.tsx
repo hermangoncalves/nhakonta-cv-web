@@ -5,33 +5,18 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { routes } from "@/router";
 import { SignInButton, useAuth } from "@clerk/clerk-react";
+import { LatestUser } from "../schemas";
 
-type Users = {
-  src: string;
-  alt: string;
+type HeroSectionProps = {
+  latestUsers: {
+    users: LatestUser[];
+    total: number;
+  }
 };
 
-const users: Users[] = [
-  {
-    src: "https://www.shadcnblocks.com/images/block/avatar-1.webp",
-    alt: "Avatar 1",
-  },
-  {
-    src: "https://www.shadcnblocks.com/images/block/avatar-2.webp",
-    alt: "Avatar 2",
-  },
-  {
-    src: "https://www.shadcnblocks.com/images/block/avatar-3.webp",
-    alt: "Avatar 3",
-  },
-  {
-    src: "https://www.shadcnblocks.com/images/block/avatar-4.webp",
-    alt: "Avatar 4",
-  },
-];
-
-const HeroSection = () => {
+const HeroSection = ({latestUsers}: HeroSectionProps) => {
   const { isSignedIn } = useAuth();
+
   return (
     <section className="mt-14">
       <div className="container text-center">
@@ -57,18 +42,20 @@ const HeroSection = () => {
           </SignInButton>
         )}
 
-        <div className="mx-auto mt-10 flex w-fit items-center gap-4 sm:flex-row">
-          <span className=" inline-flex items-center -space-x-4">
-            {users.map((avatar, index) => (
-              <Avatar key={index} className="size-10 sm:size-14 border">
-                <AvatarImage src={avatar.src} alt={avatar.alt} />
-              </Avatar>
-            ))}
-          </span>
-          <span className="text-xs text-muted-foreground">
-            250 Caboverdianos
-          </span>
-        </div>
+        {latestUsers?.total >= 4 && (
+          <div className="mx-auto mt-10 flex w-fit items-center gap-4 sm:flex-row">
+            <span className=" inline-flex items-center -space-x-4">
+              {latestUsers?.users.map((user, index) => (
+                <Avatar key={index} className="size-10 sm:size-14 border">
+                  <AvatarImage src={user.imageUrl} alt={user.firstName} />
+                </Avatar>
+              ))}
+            </span>
+            <span className="text-xs text-muted-foreground">
+              {latestUsers?.total} Caboverdianos
+            </span>
+          </div>
+        )}
       </div>
     </section>
   );

@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 export const Footer = () => {
   return (
-    <footer className="">
-      <div className="container mx-auto p-4">
+    <footer className="p-4 py-8">
+      <div className="container mx-auto">
         <div className="flex flex-col justify-between items-center">
           <div className="flex items-center space-x-2 mb-4 md:mb-0">
             <span className="text-xl font-bold">nhakonta</span>

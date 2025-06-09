@@ -4,10 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { SignInButton } from "@clerk/clerk-react";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { Button } from "../ui/button";
-import { CTA } from "./cta";
+import { CTA } from "@/modules/home/components/cta";
 
 type FaqItem = {
   id: string;
@@ -120,7 +117,6 @@ export default function Faq() {
             </AccordionItem>
           ))}
         </Accordion>
-        <CTA />
       </div>
     </section>
   );

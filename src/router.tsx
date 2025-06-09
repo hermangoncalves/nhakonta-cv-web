@@ -1,10 +1,11 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Index from "./pages/Index";
 import { Protect } from "@clerk/clerk-react";
 import OnBoardingGuard from "./components/OnBoardingGuard";
-import Dashboard from "./pages/Dashboard";
-import Onboarding from "./pages/onBoarding";
 import NotFound from "./pages/NotFound";
+import { Home } from "@/modules/home";
+import Onboarding from "./modules/onBoarding";
+import { useLatestUsers } from "./modules/home/hooks/use-latest-users";
+import Dashboard from "./modules/dashboard";
 
 export const routes = {
   home: "/",
@@ -22,7 +23,7 @@ export default function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={routes.home} element={<Index />} />
+        <Route path={routes.home} element={<Home />} />
         <Route
           path={routes.dashboard}
           element={

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Card,
@@ -9,13 +9,14 @@ import {
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { CheckCircle } from "lucide-react";
-import { useUser } from "@clerk/clerk-react";
-import BankAccountSetup from "@/components/onboarding/BankAccountSetup";
-import OnboardingComplete from "@/components/onboarding/OnboardingComplete";
-import { routes } from "@/App";
-import UserCreationHandler from "@/components/userCreationHandler";
+import BankAccountSetup from "@/modules/onBoarding/components/BankAccountSetup";
+import OnboardingComplete from "@/modules/onBoarding/components/OnboardingComplete";
+import { routes } from "@/router";
+import UserCreationHandler from "@/modules/onBoarding/components/userCreationHandler";
+import { Badge } from "@/components/ui/badge";
+import { Navbar } from "@/components/navbar";
 
-const Onboarding = () => {
+export default function Onboarding() {
   const [showOnboarding, setShowOnboarding] = useState<boolean>(false);
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
@@ -47,9 +48,7 @@ const Onboarding = () => {
   const getStepTitle = () => {
     switch (currentStep) {
       case 1:
-        return <span className="text-xl">Adicione a sua conta bancária</span>;
-      case 2:
-        return <span className="text-indigo-500">Tudo Pronto!</span>;
+        return <span className="text-lg">Adicione a sua conta bancária</span>
       default:
         return "";
     }
@@ -57,12 +56,13 @@ const Onboarding = () => {
 
   return (
     <>
+      <Navbar />
       {showOnboarding ? (
         <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
           <div className="w-full max-w-2xl mt-10">
             <div className="mb-8 text-center">
-              <h1 className="text-2xl font-semibold text-gray-900 mb-2">
-                Bem-vindo ao nhaKonta!
+              <h1 className="text-3xl font-extrabold lg:text-6xl mb-2">
+                Benvindo(a) ao nhaKonta
               </h1>
               <p className="text-gray-600 mb-6">
                 Vamos configurar a sua conta em poucos passos simples
@@ -86,20 +86,21 @@ const Onboarding = () => {
               <CardHeader>
                 <CardTitle className="flex items-center">
                   {currentStep < 2 && (
-                    <div className="w-6 h-6 bg-indigo-400 text-white rounded-full flex items-center justify-center text-sm font-semibold mr-3">
+                    <Badge className="h-6 min-w-5 rounded-full p-2 font-mono tabular-nums mr-3">
                       {currentStep}
-                    </div>
+                    </Badge>
                   )}
-                  {currentStep === 2 && (
+                  {/* {currentStep === 2 && (
                     <CheckCircle className="w-6 h-6 text-indigo-500 mr-3" />
-                  )}
+                  )} */}
                   {getStepTitle()}
                 </CardTitle>
                 <CardDescription>
-                  {currentStep === 1 &&
-                    "Adicione os dados da sua conta bancária principal"}
-                  {currentStep === 2 &&
-                    "A sua conta está configurada e pronta para usar"}
+                  {currentStep === 1 && (
+                    <span className="text-sm">
+                      Adicione os dados da sua conta bancária principal
+                    </span>
+                  )}
                 </CardDescription>
               </CardHeader>
               <CardContent>{renderStep()}</CardContent>
@@ -114,6 +115,4 @@ const Onboarding = () => {
       <UserCreationHandler setShowOnboarding={setShowOnboarding} />
     </>
   );
-};
-
-export default Onboarding;
+}
